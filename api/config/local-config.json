@@ -1,0 +1,16 @@
+{
+    "database" : {
+        "host" : "localhost",
+        "user" : "root",
+        "password": "",
+        "dbname":"rachelscake",
+        "port": 3308
+    },
+    "mail":{
+        "fromMail": "carlos.arranz@outlook.com",
+        "rachelsToMail" : "carlos.arranz@outlook.com"
+    },
+    "file" : {
+        "path": "clientUploadedFiles"
+    }
+}

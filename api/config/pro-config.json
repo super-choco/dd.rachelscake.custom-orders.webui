@@ -1,0 +1,16 @@
+{
+    "database" : {
+        "host" : "db746142897.db.1and1.com",
+        "user" : "dbo746142897",
+        "password": "R4ch3l5C4k3DB!",
+        "dbname":"db746142897",
+        "port": 3306
+    },
+    "mail":{
+        "fromMail": "pedidos@rachelscake.es",
+        "rachelsToMail" :"pedidos@rachelscake.es"
+    },
+    "file" : {
+        "path": "clientUploadedFiles"
+    }
+}

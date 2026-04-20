@@ -14,7 +14,7 @@ export default function App() {
   return (
     <>
       <header>
-        <img src="/img/logo.png" alt="Rachel's Cake" />
+        <img src="/img/new-logo.svg" alt="Rachel's Cake" />
       </header>
       <main className="page">
         {submitted

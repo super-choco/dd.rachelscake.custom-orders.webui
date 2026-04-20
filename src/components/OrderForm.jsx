@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import PersonalData from './sections/PersonalData'
-import OrderItems from './sections/OrderItems'
-import Delivery from './sections/Delivery'
-import ContactInfo from './sections/ContactInfo'
-import Terms from './Terms'
+import Stepper from './Stepper'
+import Step1Personal from './steps/Step1Personal'
+import Step2Order from './steps/Step2Order'
+import Step3Delivery from './steps/Step3Delivery'
+import Step4Summary from './steps/Step4Summary'
 
 const INITIAL = {
   clientName: '', clientEmail: '', clientPhone: '',
-  orderTypeCake: false,
+  deliveryDate: '',
+  orderTypeCake: false, isBirthday: false,
   cakeName: '', cakeAge: '', cakeTopic: '', cakeDetails: '',
   cakeSize: '', cakeType: 'fondant',
   floor1Cake: 'Sin preferencias', floor1Filling: 'Sin preferencias',
@@ -19,27 +20,27 @@ const INITIAL = {
   orderTypeOthers: false, othersDetail: '',
   images: [],
   intolerances: [], otherIntolerances: '',
-  deliveryDate: '', deliveryType: 'pickUp',
+  deliveryType: 'pickUp',
   deliveryAddress: '', deliveryCity: '', deliveryInformation: '',
   contactWay: 'Web', nickName: '',
   acceptNewsletter: false, acceptTerms: false,
 }
 
-export default function OrderForm({ onSuccess }) {
-  const [form, setForm] = useState(INITIAL)
-  const [loading, setLoading] = useState(false)
-  const [errors, setErrors] = useState({})
-
-  function set(field, value) {
-    setForm(f => ({ ...f, [field]: value }))
-    setErrors(e => ({ ...e, [field]: undefined }))
-  }
-
-  function validate() {
-    const e = {}
+function validateStep(step, form) {
+  const e = {}
+  if (step === 0) {
     if (!form.clientName.trim()) e.clientName = 'Campo obligatorio'
     if (!form.clientEmail.trim()) e.clientEmail = 'Campo obligatorio'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.clientEmail)) e.clientEmail = 'Formato de email no válido'
     if (!form.clientPhone.trim()) e.clientPhone = 'Campo obligatorio'
+    else if (!/^[+]?[\d\s\-()]{9,15}$/.test(form.clientPhone.trim())) e.clientPhone = 'Formato de teléfono no válido'
+    if (!form.deliveryDate) e.deliveryDate = 'Selecciona una fecha'
+    else {
+      const today = new Date(); today.setHours(0, 0, 0, 0)
+      if (new Date(form.deliveryDate) < today) e.deliveryDate = 'La fecha no puede ser en el pasado'
+    }
+  }
+  if (step === 1) {
     if (!form.orderTypeCake && !form.orderTypeCupcakes && !form.orderTypeCookies && !form.orderTypeOthers)
       e.orderType = 'Selecciona al menos un tipo de pedido'
     if (form.orderTypeCake && !form.cakeSize) e.cakeSize = 'Selecciona el tamaño'
@@ -48,18 +49,41 @@ export default function OrderForm({ onSuccess }) {
     if (form.orderTypeCookies && (!form.cookiesNumber || parseInt(form.cookiesNumber) < 1))
       e.cookiesNumber = 'Indica la cantidad'
     if (form.orderTypeOthers && !form.othersDetail.trim()) e.othersDetail = 'Indica los detalles'
-    if (!form.deliveryDate) e.deliveryDate = 'Selecciona una fecha'
-    else {
-      const today = new Date(); today.setHours(0,0,0,0)
-      if (new Date(form.deliveryDate) < today) e.deliveryDate = 'La fecha no puede ser en el pasado'
-    }
+  }
+  if (step === 3) {
     if (!form.acceptTerms) e.acceptTerms = 'Debes aceptar los términos'
-    return e
+  }
+  return e
+}
+
+export default function OrderForm({ onSuccess }) {
+  const [form, setForm] = useState(INITIAL)
+  const [step, setStep] = useState(0)
+  const [errors, setErrors] = useState({})
+  const [loading, setLoading] = useState(false)
+
+  function set(field, value) {
+    setForm(f => ({ ...f, [field]: value }))
+    setErrors(e => ({ ...e, [field]: undefined }))
+  }
+
+  function handleNext() {
+    const errs = validateStep(step, form)
+    if (Object.keys(errs).length > 0) { setErrors(errs); return }
+    setErrors({})
+    setStep(s => s + 1)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  function handleBack() {
+    setErrors({})
+    setStep(s => s - 1)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const errs = validate()
+    const errs = validateStep(3, form)
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
 
     setLoading(true)
@@ -120,8 +144,7 @@ export default function OrderForm({ onSuccess }) {
 
     try {
       const res = await fetch('/api/php/orders.php', { method: 'POST', body: data })
-      const text = await res.text()
-      const result = JSON.parse(text)
+      const result = JSON.parse(await res.text())
       onSuccess(result)
     } catch {
       onSuccess('ko')
@@ -130,30 +153,26 @@ export default function OrderForm({ onSuccess }) {
     }
   }
 
+  const steps = [
+    <Step1Personal form={form} set={set} errors={errors} />,
+    <Step2Order form={form} set={set} errors={errors} />,
+    <Step3Delivery form={form} set={set} />,
+    <Step4Summary form={form} set={set} errors={errors} loading={loading} onBack={handleBack} />,
+  ]
+
   return (
     <form onSubmit={handleSubmit} noValidate>
       <h1>Confirma tu pedido</h1>
-      <PersonalData form={form} set={set} errors={errors} />
-      <OrderItems form={form} set={set} errors={errors} />
-      <Delivery form={form} set={set} errors={errors} />
-      <ContactInfo form={form} set={set} errors={errors} />
-      <div className="card">
-        <label className="check-label">
-          <input type="checkbox" checked={form.acceptNewsletter}
-            onChange={e => set('acceptNewsletter', e.target.checked)} />
-          Deseo recibir la newsletter con información y promociones
-        </label>
-        <label className="check-label" style={{ marginTop: '0.5rem' }}>
-          <input type="checkbox" checked={form.acceptTerms}
-            onChange={e => set('acceptTerms', e.target.checked)} />
-          Acepto los <a href="#terms" style={{ color: 'var(--color-primary-dark)' }}>términos y condiciones</a>
-        </label>
-        {errors.acceptTerms && <p className="error-msg">{errors.acceptTerms}</p>}
-        <button className="btn-submit" type="submit" disabled={loading} style={{ marginTop: '1.5rem' }}>
-          {loading ? 'Enviando...' : 'Confirmar pedido'}
-        </button>
-      </div>
-      <Terms />
+      <Stepper current={step} />
+      {steps[step]}
+      {step < 3 && (
+        <div className="wizard-nav">
+          {step > 0 && (
+            <button type="button" className="btn-back" onClick={handleBack}>← Atrás</button>
+          )}
+          <button type="button" className="btn-next" onClick={handleNext}>Siguiente →</button>
+        </div>
+      )}
     </form>
   )
 }

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rachel's Cake — Pedido confirmado</title>
+</head>
+<body style="margin:0;padding:0;background-color:#fdf6f7;font-family:Georgia,serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#fdf6f7;padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+          <!-- Header -->
+          <tr>
+            <td align="center" style="background-color:#c97880;padding:32px 24px;border-radius:12px 12px 0 0;">
+              <p style="margin:0;font-family:Georgia,serif;font-size:28px;color:#ffffff;letter-spacing:2px;">Rachel's Cake</p>
+              <p style="margin:8px 0 0;font-family:Arial,sans-serif;font-size:13px;color:#fde8eb;letter-spacing:1px;text-transform:uppercase;">Pedido confirmado</p>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="background-color:#ffffff;padding:40px 40px 32px;border-left:1px solid #f4d0d4;border-right:1px solid #f4d0d4;">
+              <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:15px;color:#555;">Hola, <strong>@clientName</strong> 🎂</p>
+              <p style="margin:0 0 24px;font-family:Arial,sans-serif;font-size:15px;color:#555;line-height:1.6;">
+                ¡Hemos recibido tu pedido! Nos pondremos en contacto contigo para confirmar los detalles y el presupuesto.
+              </p>
+
+              <!-- Order ID -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+                <tr>
+                  <td style="background-color:#fdf6f7;border-left:4px solid #c97880;padding:14px 20px;border-radius:0 8px 8px 0;">
+                    <p style="margin:0;font-family:Arial,sans-serif;font-size:12px;color:#999;text-transform:uppercase;letter-spacing:1px;">Número de pedido</p>
+                    <p style="margin:4px 0 0;font-family:Georgia,serif;font-size:22px;color:#c97880;font-weight:bold;">#@orderId</p>
+                    <p style="margin:4px 0 0;font-family:Arial,sans-serif;font-size:12px;color:#bbb;">@orderDate</p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Order details -->
+              <p style="margin:0 0 12px;font-family:Arial,sans-serif;font-size:13px;color:#999;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #f4d0d4;padding-bottom:8px;">Resumen del pedido</p>
+
+              <p style="margin:0;font-family:Arial,sans-serif;font-size:14px;color:#444;line-height:1.9;">
+                @cakeTitle@cakeNameTitle@cakeName@cakeAgeTitle@cakeAge@cakeTopicTitle@cakeTopic@cakeDetailsTitle@cakeDetails@cakeSizeTitle@cakeSize@cakeTypeTitle@cakeType@floor1CakeTitle@floor1Cake@floor1FillingTitle@floor1Filling@floor2CakeTitle@floor2Cake@floor2FillingTitle@floor2Filling@floor3CakeTitle@floor3Cake@floor3FillingTitle@floor3Filling@doubleFillingTitle@doubleFilling@cupcakesTitle@cupcakesAmountTitle@cupcakesAmount@cupcakesDetailTitle@cupcakesDetail@cookiesTitle@cookiesAmountTitle@cookiesAmount@cookiesDetailTitle@cookiesDetail@othersTitle@othersDetailTitle@othersDetail@candleTitle@candleNumber@intolerancesDetailTitle@intolerancesDetail
+              </p>
+
+              <p style="margin:24px 0 0;font-family:Arial,sans-serif;font-size:14px;color:#444;line-height:1.9;">
+                <strong style="color:#c97880;">@deliveryDateTitle</strong> @deliveryDate<br>
+                <strong style="color:#c97880;">Entrega:</strong> @deliveryType — @deliveryPickUpType@deliveryAddressTitle@deliveryAddress @deliveryCity@deliveryHomeInformationTitle@deliveryHomeInformation
+              </p>
+
+              @nickNameTitle<span style="font-family:Arial,sans-serif;font-size:14px;color:#444;">@nickName</span>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#fdf6f7;padding:24px 40px;border:1px solid #f4d0d4;border-top:none;border-radius:0 0 12px 12px;text-align:center;">
+              <p style="margin:0 0 4px;font-family:Arial,sans-serif;font-size:13px;color:#c97880;font-weight:bold;">Rachel's Cake</p>
+              <p style="margin:0;font-family:Arial,sans-serif;font-size:12px;color:#aaa;line-height:1.8;">
+                C/Federico García Lorca, 6 · 08160 Montmeló (BCN)<br>
+                <a href="mailto:info@rachelscake.es" style="color:#c97880;text-decoration:none;">info@rachelscake.es</a> · 669 037 577
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

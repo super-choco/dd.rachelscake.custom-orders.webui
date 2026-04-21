@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuevo pedido — Rachel's Cake</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f5f5f5;font-family:Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f5f5f5;padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background-color:#c97880;padding:24px 32px;border-radius:12px 12px 0 0;">
+              <p style="margin:0;font-family:Georgia,serif;font-size:22px;color:#ffffff;">Rachel's Cake</p>
+              <p style="margin:4px 0 0;font-family:Arial,sans-serif;font-size:12px;color:#fde8eb;text-transform:uppercase;letter-spacing:1px;">Nuevo pedido recibido · #@orderId</p>
+            </td>
+          </tr>
+
+          <!-- Client info -->
+          <tr>
+            <td style="background-color:#ffffff;padding:28px 32px 0;border-left:1px solid #e0e0e0;border-right:1px solid #e0e0e0;">
+              <p style="margin:0 0 16px;font-size:13px;color:#999;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #eee;padding-bottom:8px;">Datos del cliente</p>
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:4px 0;font-size:14px;color:#333;width:140px;"><strong>Nombre:</strong></td>
+                  <td style="padding:4px 0;font-size:14px;color:#555;">@clientName</td>
+                </tr>
+                <tr>
+                  <td style="padding:4px 0;font-size:14px;color:#333;"><strong>Email:</strong></td>
+                  <td style="padding:4px 0;font-size:14px;color:#555;"><a href="mailto:@clientMail" style="color:#c97880;">@clientMail</a></td>
+                </tr>
+                <tr>
+                  <td style="padding:4px 0;font-size:14px;color:#333;"><strong>Teléfono:</strong></td>
+                  <td style="padding:4px 0;font-size:14px;color:#555;">@clientPhone</td>
+                </tr>
+                @nickNameTitle<tr><td style="padding:4px 0;font-size:14px;color:#333;"><strong>Nick redes:</strong></td><td style="padding:4px 0;font-size:14px;color:#555;">@nickName</td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Order details -->
+          <tr>
+            <td style="background-color:#ffffff;padding:24px 32px 0;border-left:1px solid #e0e0e0;border-right:1px solid #e0e0e0;">
+              <p style="margin:0 0 16px;font-size:13px;color:#999;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #eee;padding-bottom:8px;">Detalle del pedido</p>
+              <p style="margin:0;font-size:14px;color:#444;line-height:2;">
+                @cakeTitle@cakeNameTitle@cakeName@cakeAgeTitle@cakeAge@cakeTopicTitle@cakeTopic@cakeDetailsTitle@cakeDetails@cakeSizeTitle@cakeSize@cakeTypeTitle@cakeType@floor1CakeTitle@floor1Cake@floor1FillingTitle@floor1Filling@floor2CakeTitle@floor2Cake@floor2FillingTitle@floor2Filling@floor3CakeTitle@floor3Cake@floor3FillingTitle@floor3Filling@doubleFillingTitle@doubleFilling@cupcakesTitle@cupcakesAmountTitle@cupcakesAmount@cupcakesDetailTitle@cupcakesDetail@cookiesTitle@cookiesAmountTitle@cookiesAmount@cookiesDetailTitle@cookiesDetail@othersTitle@othersDetailTitle@othersDetail@candleTitle@candleNumber@intolerancesDetailTitle@intolerancesDetail
+              </p>
+            </td>
+          </tr>
+
+          <!-- Delivery -->
+          <tr>
+            <td style="background-color:#ffffff;padding:24px 32px 28px;border-left:1px solid #e0e0e0;border-right:1px solid #e0e0e0;">
+              <p style="margin:0 0 16px;font-size:13px;color:#999;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #eee;padding-bottom:8px;">Entrega</p>
+              <p style="margin:0;font-size:14px;color:#444;line-height:2;">
+                <strong>Fecha:</strong> @deliveryDate<br>
+                <strong>Modalidad:</strong> @deliveryType — @deliveryPickUpType@deliveryAddressTitle@deliveryAddress @deliveryCity@deliveryHomeInformationTitle@deliveryHomeInformation
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#f9f9f9;padding:16px 32px;border:1px solid #e0e0e0;border-top:none;border-radius:0 0 12px 12px;text-align:center;">
+              <p style="margin:0;font-size:12px;color:#aaa;">Pedido recibido el @orderDate · Rachel's Cake · pedidos@rachelscake.es</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

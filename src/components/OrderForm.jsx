@@ -143,7 +143,7 @@ export default function OrderForm({ onSuccess }) {
     if (form.acceptNewsletter) data.append('acceptNewsletter', 'accepted')
 
     try {
-      const res = await fetch('/api/php/orders.php', { method: 'POST', body: data })
+      const res = await fetch(`${import.meta.env.BASE_URL}api/php/orders.php`, { method: 'POST', body: data })
       const result = JSON.parse(await res.text())
       onSuccess(result)
     } catch {

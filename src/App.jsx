@@ -14,7 +14,7 @@ export default function App() {
   return (
     <>
       <header>
-        <img src="/img/new-logo.svg" alt="Rachel's Cake" />
+        <img src={`${import.meta.env.BASE_URL}img/new-logo.svg`} alt="Rachel's Cake" />
       </header>
       <main className="page">
         {submitted

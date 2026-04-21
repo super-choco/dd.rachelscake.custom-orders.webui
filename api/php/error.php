@@ -4,7 +4,7 @@
     error_reporting(0); 
     $old_error_handler = set_error_handler("userErrorHandler"); 
 
-    function userErrorHandler ($errno, $errmsg, $filename, $linenum, $vars) 
+    function userErrorHandler ($errno, $errmsg, $filename, $linenum)
     { 
         $time=date("d M Y H:i:s");
         // Get the error type from the error number 

@@ -5,7 +5,7 @@ function openConnection($dbConfig)
     $conn = mysqli_connect($dbConfig->host, $dbConfig->user, $dbConfig->password, $dbConfig->dbname);
     $conn->set_charset("utf8");
     if($conn->connect_error){
-        die("ERROR: Could not connect. " .  $conn->connect_error);
+        throw new Exception("DB connection failed: " . $conn->connect_error);
     }
     return $conn;
 }

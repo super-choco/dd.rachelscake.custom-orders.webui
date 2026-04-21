@@ -30,6 +30,7 @@ async function uploadDir(localDir, remoteDir) {
   for (const entry of entries) {
     const localPath = path.join(localDir, entry.name)
     const remoteDest = `${remoteDir}/${entry.name}`
+    if (entry.name === '.DS_Store') continue
     if (entry.isDirectory()) {
       await uploadDir(localPath, remoteDest)
     } else {

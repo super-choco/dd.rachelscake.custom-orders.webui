@@ -28,9 +28,8 @@
         fclose($errfile);
 
         if($errno!=2 && $errno!=8) {
-            //Terminate script if fatal error 
-            die("A fatal error has occurred. Script execution has been aborted"); 
-        } 
+            throw new ErrorException($errmsg, 0, $errno, $filename, $linenum);
+        }
     }   
 
 ?>

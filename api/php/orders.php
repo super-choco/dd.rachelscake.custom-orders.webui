@@ -9,22 +9,27 @@
 
     $configuration = new OrdersConfiguration();
 
-    $orderToSave = mapFormToOrder($_POST);
-    $images = $_FILES['images'];
-    
-    $conn = openConnection($configuration->dbConfig);
-    $orderToSave->orderId = saveOrder($conn, $orderToSave);
-    closeConnection($conn);
+    try {
+        $orderToSave = mapFormToOrder($_POST);
+        $images = $_FILES['images'];
 
-    if($orderToSave->orderId > 0) {
-        if($images['size'][0] > 0) {
-            SaveImagesToServer($configuration->fileConfig, $images, $orderToSave->orderId);
-        }        
-        SendConfirmationMail($orderToSave, $configuration->mailConfig);
-        echo json_encode('ok');
-        
-    } else {
-        echo json_encode('ko');
+        $conn = openConnection($configuration->dbConfig);
+        $orderToSave->orderId = saveOrder($conn, $orderToSave);
+        closeConnection($conn);
+
+        if($orderToSave->orderId > 0) {
+            if($images['size'][0] > 0) {
+                SaveImagesToServer($configuration->fileConfig, $images, $orderToSave->orderId);
+            }
+            SendConfirmationMail($orderToSave, $configuration->mailConfig);
+            echo json_encode('ok');
+        } else {
+            error_log('[orders.php] saveOrder devolvió 0 o negativo');
+            echo json_encode('ko');
+        }
+    } catch (Throwable $e) {
+        error_log('[orders.php] ERROR: ' . $e->getMessage() . ' en ' . $e->getFile() . ':' . $e->getLine());
+        echo json_encode(['error' => $e->getMessage()]);
     }
 
     function mapFormToOrder($postValues)

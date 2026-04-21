@@ -143,10 +143,16 @@ export default function OrderForm({ onSuccess }) {
     if (form.acceptNewsletter) data.append('acceptNewsletter', 'accepted')
 
     try {
-      const res = await fetch(`${import.meta.env.BASE_URL}api/php/orders.php`, { method: 'POST', body: data })
-      const result = JSON.parse(await res.text())
+      const url = `${import.meta.env.BASE_URL}api/php/orders.php`
+      console.log('[OrderForm] Enviando a:', url)
+      const res = await fetch(url, { method: 'POST', body: data })
+      const rawText = await res.text()
+      console.log('[OrderForm] Respuesta raw:', rawText)
+      const result = JSON.parse(rawText)
+      console.log('[OrderForm] Resultado:', result)
       onSuccess(result)
-    } catch {
+    } catch (err) {
+      console.error('[OrderForm] Error en fetch:', err)
       onSuccess('ko')
     } finally {
       setLoading(false)

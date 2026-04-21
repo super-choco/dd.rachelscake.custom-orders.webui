@@ -5,7 +5,7 @@ function createMailHeaders($fromMail) {
     $headers = "From: ".$fromMail."\r\n";
     $headers .= "Reply-To: ".$fromMail."\r\n";
     $headers .= "Return-Path: ".$fromMail."\r\n";
-    $headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
     return $headers;
 }
@@ -256,7 +256,7 @@ function createMailContent($order, $contentTemplate) {
         $content = str_replace('@nickName', '', $content);
     }
     
-    return utf8_decode($content);
+    return $content;
 }
 
 function SendMailMessage($email_to, $subject, $content, $headers) {

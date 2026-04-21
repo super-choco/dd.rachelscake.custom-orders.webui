@@ -82,12 +82,14 @@
             $order->othersDetail = $postValues['othersDetail'];
         }
 
+        $parts = [];
         if(!empty($postValues['intolerancesCheck'])) {
-            foreach($postValues['intolerancesCheck'] as $selected) {
-                $order->intolerances .= $selected.", ";
-            }
+            $parts = $postValues['intolerancesCheck'];
         }
-        $order->intolerances .= $postValues['otherIntolerances'];
+        if(!empty($postValues['otherIntolerances'])) {
+            $parts[] = $postValues['otherIntolerances'];
+        }
+        $order->intolerances = implode(', ', $parts);
 
         $order->deliveryDate = $postValues['deliveryDate'];
       
